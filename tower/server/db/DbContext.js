@@ -9,7 +9,7 @@ class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
   TowerEvents = mongoose.model('TowerEvent', TowerEventSchema);
-  // Comments = mongoose.model('Comment', CommentSchema);
+  Comments = mongoose.model('Comment', CommentSchema);
   Tickets = mongoose.model('Ticket', TicketSchema)
 }
 
