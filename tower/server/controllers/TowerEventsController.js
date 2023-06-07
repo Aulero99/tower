@@ -1,3 +1,4 @@
+import { commentsService } from "../services/CommentsService";
 import { ticketsService } from "../services/TicketsService";
 import { towerEventsService } from "../services/TowerEventsService";
 import BaseController from "../utils/BaseController";
@@ -10,10 +11,20 @@ export class TowerEventsController extends BaseController{
             .get('',this.findAllTowerEvents)
             .get('/:towerEventId',this.findTowerEventById)
             .get('/:towerEventId/tickets', this.findTicketsByTowerEventId)
+            .get('/:towerEventId/comments', this.findCommentsByEventId)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.postTowerEvent)
             .put('/:towerEventId', this.editEvent)
             .delete('/:towerEventId', this.cancelEvent)
+    }
+    async findCommentsByEventId(req, res, next) {
+        try {
+            const towerEventId = req.params.towerEventId
+            const comments = await commentsService.findCommentsByEventId(towerEventId)
+            return res.send(comments) 
+        } catch (error) {
+            next(error)
+        }
     }
     async findTicketsByTowerEventId(req, res, next) {
         try {

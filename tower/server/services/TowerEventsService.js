@@ -45,7 +45,7 @@ class TowerEventsService{
         return towerEvent
     }
     async findAllTowerEvents(data) {
-        const towerEvents = await dbContext.TowerEvents.find(data).populate('creator ticketCount')
+        const towerEvents = await dbContext.TowerEvents.find().populate('creator ticketCount')
         return towerEvents
     }
 
