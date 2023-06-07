@@ -1,14 +1,6 @@
-// export const dev = window.location.origin.includes('localhost')
-// export const baseURL = dev ? 'http://localhost:3000' : ''
-// export const useSockets = false
-// export const domain = ''
-// export const clientId = ''
-// export const audience = ''
-
-
 export const dev = window.location.origin.includes('localhost')
-export const baseURL = 'https://sandbox.codeworksacademy.com/'
+export const baseURL = dev ? 'http://localhost:3000' : ''
 export const useSockets = false
-export const domain = 'codeworksclassroom.auth0.com'
-export const audience = 'https://codeworksclassroom.com'
-export const clientId = 'pOXw2OGv1LsYi7LEBmDF04RLkXQvldml'
+export const domain = 'dev-vle07jgfwkf0qxzw.us.auth0.com'
+export const audience = 'http://fishbowl.com'
+export const clientId = 'NBELLFVM5dnrCzL54uRsTSVLfoQQymek'
