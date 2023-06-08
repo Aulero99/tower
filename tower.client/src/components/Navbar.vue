@@ -1,33 +1,44 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+      <div class="logo-container">
+        <img alt="logo" src="../assets/img/logo.svg"/>
       </div>
     </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
+    <div class="">
+      <!-- LOGIN COMPONENT HERE -->
+        <Login />
+      <ul class="navbar-nav">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
+          <router-link :to="{ name: 'Home' }" class="btn text-success lighten-30 selectable nav-link">
+            Home
           </router-link>
         </li>
+        <li v-if="user.isAuthenticated">
+          <router-link  :to="{ name: 'Account' }" class="btn text-success lighten-30 selectable nav-link">
+            Account
+          </router-link>
+        </li>
+        <li v-if="user.isAuthenticated">
+          <button class="btn text-success lighten-30 selectable nav-link">
+            New Event
+          </button>
+        </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <Login />
     </div>
   </nav>
 </template>
 
 <script>
+import { computed } from 'vue';
 import Login from './Login.vue';
+import { AppState } from '../AppState';
 export default {
   setup() {
-    return {}
+    return {
+      account: computed(() => AppState.account),
+      user: computed(() => AppState.user),
+    }
   },
   components: { Login }
 }
@@ -39,7 +50,9 @@ a:hover {
 }
 
 .nav-link {
-  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  text-transform: lowercase;
+  padding: 0.5rem;
 }
 
 .navbar-nav .router-link-exact-active {
@@ -47,10 +60,31 @@ a:hover {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+nav{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+}
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-container{
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.logo-container img{
+  width: 70%;
+}
 
 @media screen and (min-width: 768px) {
-  nav {
-    height: 64px;
-  }
+
 }
 </style>

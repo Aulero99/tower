@@ -1,23 +1,19 @@
 <template>
   <span class="navbar-text">
-    <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
-      v-if="!user.isAuthenticated">
-      Login
-    </button>
+    <div v-if="!user.isAuthenticated" class="login-container">
+      <button class="btn text-success lighten-30 selectable text-lowercase" @click="login">
+        Login
+      </button>
+    </div>
     <div v-else>
       <div class="dropdown my-2 my-lg-0">
-        <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
-          <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded" />
+        <div type="button" class="border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
+          <div v-if="account.picture || user.picture" class="profile-img-container">
+            <img :src="account.picture || user.picture" alt="account photo" class="rounded" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
           <div class="list-group">
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item dropdown-item list-group-item-action">
-                Manage Account
-              </div>
-            </router-link>
             <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
               <i class="mdi mdi-logout"></i>
               logout
@@ -49,4 +45,20 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.login-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.profile-img-container{
+  width: 100%;
+  padding: 0.5rem;
+}
+.profile-img-container img{
+  width: 100%;
+}
+</style>

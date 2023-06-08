@@ -1,19 +1,77 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
-    </div>
+  <div class="container-fluid">
+    <section class="row">
+      <div class="col-12 page-top">
+        <div class="logo-container">
+          <img src="../assets/img/logo-wide.svg" alt="logo">
+        </div>
+      </div>
+    </section>
+
+    <!-- <section>
+      <div class="slider row">
+        <div class="col-12">
+          Slider Goes Here
+        </div>
+      </div>
+    </section> -->
+    
+
+    <section v-if="!towerEvents">
+      <Loader/>
+    </section>
+
+    <section v-if="towerEvents" class="row">
+      
+      <div class="col-12 p-1">
+        <div class="d-flex justify-content-around my-3 bg-info rounded p-3">
+          <button @click="filterBy = ''" class="btn btn-outline-light w-25 mx-2">All</button>
+          <button @click="filterBy = 'concert'" class="btn btn-outline-light w-25 mx-2">Concerts</button>
+          <button @click="filterBy = 'convention'" class="btn btn-outline-light w-25 mx-2">Conventions</button>
+          <button @click="filterBy = 'sport'" class="btn btn-outline-light w-25 mx-2">Sports</button>
+          <button @click="filterBy = 'digital'" class="btn btn-outline-light w-25 mx-2">Digital</button>
+        </div>
+      </div>
+
+      <div v-for="t in towerEvents" :key="t.id" class="col-3 p-0">
+        <TowerEventCard :towerEvent="t"/>
+      </div>
+    
+    </section>
   </div>
 </template>
 
 <script>
+import { computed, onMounted, ref } from 'vue'
+import { towerEventsService } from '../services/TowerEventsService'
+import Pop from '../utils/Pop'
+import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 export default {
   setup() {
-    return {}
+    const filterBy = ref('')
+
+    async function getTowerEventsFromApi() {
+      try { await towerEventsService.getTowerEventsFromApi() } 
+      catch (error) { 
+        Pop.error(error, '[HomePage: getTowerEventsFromApi()]')
+        logger.log(error) 
+      }
+    }
+
+    onMounted(()=>{
+      getTowerEventsFromApi()
+    })
+    return {
+      filterBy,
+      towerEvents: computed(()=> {
+        if (filterBy.value == "") {
+          return AppState.towerEvents
+        } else {
+          return AppState.towerEvents.filter(a => a.type == filterBy.value)
+        }
+      }),
+    }
   }
 }
 </script>
@@ -25,7 +83,6 @@ export default {
   place-content: center;
   text-align: center;
   user-select: none;
-
   .home-card {
     width: 50vw;
 
@@ -36,6 +93,19 @@ export default {
       object-fit: contain;
       object-position: center;
     }
+  }
+}
+
+.page-top{
+  height: 10vh;
+  min-height: 2.7rem;
+  padding: 0.25rem;
+}
+.logo-container{
+  height: 100%;
+  padding: 0.4rem;
+  img{
+    height: 100%;
   }
 }
 </style>
