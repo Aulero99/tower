@@ -5,6 +5,12 @@
       <section v-if="towerEvent">
          <ActiveTowerEventCard :towerEvent="towerEvent"/>
       </section>
+      <section>
+        <TicketholdersArea/>
+      </section>
+      <section>
+        <CommentsArea/>
+      </section>
 </template>
   
 <script>
@@ -13,7 +19,9 @@ import { useRoute } from 'vue-router'
 import Pop from '../utils/Pop'
 import { towerEventsService } from '../services/TowerEventsService'
 import { AppState } from '../AppState'
+import CommentsArea from '../components/CommentsArea.vue'
   export default {
+  components: { CommentsArea },
     props:{
 
     },

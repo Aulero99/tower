@@ -12,7 +12,7 @@ class TowerEventsService{
     async getActiveEventFromApi(route){
         const res = await api.get(`api/events/${route}`)
         AppState.activeTowerEvent = new TowerEvent(res.data)
-        logger.log(AppState.activeTowerEvent)
+        // logger.log(AppState.activeTowerEvent)
     }
 }
 
