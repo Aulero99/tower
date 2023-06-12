@@ -10,7 +10,7 @@
             <p> {{ towerEvent.location }} </p>
             <p> {{ towerEvent.startDate }} </p>
             <div class="notice" 
-        v-if="towerEvent.isCancelled">
+        v-if="towerEvent.isCanceled">
             Cancelled
         </div>
         <div class="notice"

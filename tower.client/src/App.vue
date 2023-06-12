@@ -12,6 +12,10 @@
     </section>
   
   </main>
+
+  <Modal id="newEvent">
+    <CreateEventForm />
+  </Modal>
 </template>
 
 <script>

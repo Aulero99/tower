@@ -1,9 +1,11 @@
 <template>
+    <div v-if="user.isAuthenticated">
+        <CreateCommentCard/>
+    </div>
     <div v-if="!comments">
         <loader/>
     </div>
-    <div v-else>
-        
+    <div v-else class="mx-2">
         <div v-for="c in comments" :key="c.id">
             <CommentCard :comment="c"/>
         </div>
@@ -41,7 +43,8 @@ import { AppState } from '../AppState'
             AppState.comments = null
         })
       return {
-        comments: computed(()=>AppState.comments)
+        user: computed(()=>AppState?.user),
+        comments: computed(()=>AppState?.comments)
       }
     }
   }

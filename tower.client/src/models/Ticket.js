@@ -1,5 +1,6 @@
 export class Ticket{
     constructor(data){
+        this.id = data.id
         this.accountId = data.accountId
         this.holderName = data.profile.name
         this.holderImg = data.profile.picture

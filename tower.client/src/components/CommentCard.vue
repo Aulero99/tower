@@ -1,5 +1,5 @@
 <template>
-    <div class="comment-card">
+    <div class="comment-card my-2">
         <div class="user">
             <img 
             :src="comment.creatorImg" 
@@ -12,6 +12,12 @@
             <p>
                 {{ comment.body }}
             </p>
+            <button 
+            class="btn btn-danger mt-3"
+            v-if="comment.creatorId == user.id" 
+            @click="deleteComment(comment.id)">
+                Delete Comment
+            </button>
         </div>
     </div>
 </template>
@@ -21,6 +27,8 @@ import { computed } from 'vue'
 import { Comment } from '../models/Comment'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
+import { commentsService } from '../services/CommentsService'
   export default {
     props:{
         comment: {type: Comment, required: true}
@@ -28,13 +36,22 @@ import { logger } from '../utils/Logger'
     setup() {
       return {
         tickets: computed(()=> AppState?.tickets),
+        user: computed(()=> AppState?.user),
+        
         hasTicket(id){
-            let ticket = AppState?.tickets.filter(t=>t.accountId == id)
-            logger.log('the filter params is', id, 'and returns', ticket)
-            if(ticket != []){
-                return false
+            let filter = AppState?.tickets.filter(t => t.accountId == id )
+            if(filter == 0){ return false }
+            else{ return true }
+        },
+
+        async deleteComment(id){
+            try {
+                if(await Pop.confirm('Do you want to delete this comment?'))
+                await commentsService.deleteComment(id)
+            } catch (error) {
+                Pop.error(error,'[CommentCard: deleteComment]')
+                logger.log(error)
             }
-            return true
         }
       }
     }
@@ -60,8 +77,8 @@ p{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
     width: 100%;
 }
 .content{

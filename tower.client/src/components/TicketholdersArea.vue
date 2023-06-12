@@ -1,6 +1,6 @@
 <template>
-    <h5>See Who is Attending</h5>
-    <div class="background">
+    <h5 class="mx-2 mt-3">See Who is Attending</h5>
+    <div class="background mx-2">
         <div v-for="t in tickets" :key="t.id">
             <TicketholderCard :ticketholder="t"/>
         </div>

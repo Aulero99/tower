@@ -9,6 +9,8 @@ export const AppState = reactive({
   towerEvents: [],
   /** @type {import('./models/TowerEvent.js').TowerEvent{}|null} */
   activeTowerEvent: null,
+  /** @type {import('./models/Comment.js').Comment{}} */
+  comment: {},
   /** @type {import('./models/TowerEvent.js').Comment[]|null} */
   comments: null,
   /** @type {import('./models/TowerEvent.js').Ticket[]|null} */

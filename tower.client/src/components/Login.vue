@@ -7,19 +7,15 @@
     </div>
     <div v-else>
       <div class="dropdown my-2 my-lg-0">
-        <div type="button" class="border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
+        <div type="button" class="border-0 selectable no-select" aria-expanded="false">
           <div v-if="account.picture || user.picture" class="profile-img-container">
-            <img :src="account.picture || user.picture" alt="account photo" class="rounded" />
+            <img :src="account.picture || user.picture" alt="account photo" />
           </div>
         </div>
-        <div class="dropdown-menu dropdown-menu-lg-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
-          <div class="list-group">
-            <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
+        <button class="btn btn-danger" @click="logout">
               <i class="mdi mdi-logout"></i>
               logout
-            </div>
-          </div>
-        </div>
+        </button>
       </div>
     </div>
   </span>
@@ -57,8 +53,11 @@ export default {
 .profile-img-container{
   width: 100%;
   padding: 0.5rem;
+  display: flex;
+  justify-content: center;
 }
 .profile-img-container img{
-  width: 100%;
+  width: 70%;
+  border-radius: 50%;
 }
 </style>

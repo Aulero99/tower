@@ -8,13 +8,13 @@ export class TowerEvent{
         this.description = data.description || 'No Description'
         this.coverImg = data.coverImg || ''
         this.location = data.location || ''
-        this.capacity = data.capacity || 5
-        this.ticketCount = data.ticketCount || 2
+        this.capacity = data.capacity || 1
+        this.ticketCount = data.ticketCount
         this.type = data.type
         this.startDate = new Date(data.startDate).toLocaleDateString('en-US')
         this.startTime = new Date(data.startDate).toLocaleTimeString('en-US', {timeStyle: 'short'})
         this.createdAt = new Date(data.createdAt).toLocaleDateString('en-US')
         this.updatedAt = new Date(data.updatedAt).toLocaleDateString('en-US')
-        this.isCancelled = data.isCancelled || false
+        this.isCanceled = data.isCanceled
     }
 }

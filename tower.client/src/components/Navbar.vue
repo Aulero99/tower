@@ -20,7 +20,12 @@
           </router-link>
         </li>
         <li v-if="user.isAuthenticated">
-          <button class="btn text-success lighten-30 selectable nav-link">
+          <button 
+          class="btn text-success lighten-30 selectable nav-link"
+          type="button" 
+          data-bs-toggle="offcanvas" 
+          data-bs-target="#newEvent" 
+          aria-controls="offcanvasExample">
             New Event
           </button>
         </li>

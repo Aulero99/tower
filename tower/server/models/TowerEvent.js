@@ -5,13 +5,13 @@ const ObjectId = Schema.Types.ObjectId
 export const TowerEventSchema = new Schema(
     {
         creatorId: {type: ObjectId, required: true, ref: 'Account'},
-        name: {type:String, required:true, maxlength: 25, minlength: 2},
+        name: {type:String, required:true, maxlength: 50, minlength: 2},
         description: {type:String, required:true, maxlength: 1500, minlength: 3 },
-        coverImg: {type:String, required:false, maxlength: 500, minlength: 3, default:'https://wallpapercave.com/wp/wp7126218.jpg'},
+        coverImg: {type:String, required:false, maxlength: 500, default:'https://wallpapercave.com/wp/wp7126218.jpg'},
         location: {type:String, required:true, maxlength: 100, minlength: 2},
-        capacity: {type:Number, required:true, min: 5, max:200000},
+        capacity: {type:Number, required:true, min: 1, max:200000},
         startDate: {type:Date, required:true},
-        isCanceled: {type:Boolean, required:true, default:false},
+        isCanceled: {type:Boolean, default:false},
         type: {type:String, required:true, enum:[
             'concert',
             'convention',
